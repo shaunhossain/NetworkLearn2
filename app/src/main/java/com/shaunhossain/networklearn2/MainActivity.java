@@ -19,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     TextView contentText;
+    NetworkService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,13 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        service = retrofit.create(NetworkService.class);
+        getResultOfTodList();
 
-        NetworkService service = retrofit.create(NetworkService.class);
+
+    }
+
+    public  void getResultOfTodList(){
 
         Map<String, String> parameters = new HashMap<>();
         parameters.put("userId", "2");
