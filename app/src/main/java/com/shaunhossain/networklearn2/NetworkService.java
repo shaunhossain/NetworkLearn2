@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface NetworkService {
 
@@ -20,4 +21,7 @@ public interface NetworkService {
 
     @GET("todos")
     Call<List<TodoList>> getList(@QueryMap Map<String, String>parameters);
+
+    @GET
+    Call<List<TodoList>> getList(@Url String Url);
 }

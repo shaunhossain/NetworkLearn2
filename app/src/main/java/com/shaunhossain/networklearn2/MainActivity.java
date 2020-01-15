@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         //Call<List<TodoList>> call = service.getList(1 , "id" ,"asec");
 
         Call<List<TodoList>> call = service.getList(parameters);
+        //Call<List<TodoList>> call = service.getList("todos/1");
 
         call.enqueue(new Callback<List<TodoList>>() {
             @Override
