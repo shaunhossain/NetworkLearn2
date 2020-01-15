@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Call<List<TodoList>> call = service.getList(1 , "id" ,"asec");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("userId", "2");
+        parameters.put("_sort", "id");
+        parameters.put("_order", "desec");
+
+        //Call<List<TodoList>> call = service.getList(1 , "id" ,"asec");
+
+        Call<List<TodoList>> call = service.getList(parameters);
 
         call.enqueue(new Callback<List<TodoList>>() {
             @Override
