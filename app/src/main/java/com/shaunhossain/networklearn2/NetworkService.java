@@ -10,5 +10,9 @@ import retrofit2.http.Query;
 public interface NetworkService {
 
     @GET("todos")
-    Call<List<TodoList>> getList(@Query("id")int id);
+    Call<List<TodoList>> getList(
+            @Query("userId")int userId,
+            @Query("_sort") String id,
+            @Query("_order") String order
+    );
 }

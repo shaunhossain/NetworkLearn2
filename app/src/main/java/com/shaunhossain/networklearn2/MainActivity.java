@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Call<List<TodoList>> call = service.getList(1);
+        Call<List<TodoList>> call = service.getList(1 , "id" ,"asec");
 
         call.enqueue(new Callback<List<TodoList>>() {
             @Override
