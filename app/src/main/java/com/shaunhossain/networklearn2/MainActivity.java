@@ -45,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
        // Posts posts = new Posts(21,"i am a android developer.","i have to learn Kotlin");
 
-        Call<Posts>call=service.CreatePost(21,"i am a android developer.","i have to learn Kotlin and dejango");
+        //Call<Posts>call=service.CreatePost(21,"i am a android developer.","i have to learn Kotlin and dejango");
+
+        Map<String, String>post = new HashMap<>();
+        post.put("userId","11");
+        post.put("title","i love android development");
+        post.put("body","i will lead my life to it");
+
+        Call<Posts>call =service.CreatePost(post);
 
         call.enqueue(new Callback<Posts>() {
             @Override
