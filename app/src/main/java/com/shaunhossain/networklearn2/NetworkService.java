@@ -5,6 +5,8 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -29,4 +31,12 @@ public interface NetworkService {
 
     @POST("posts")
     Call<Posts> CreatePost(@Body Posts posts);
+
+    @FormUrlEncoded
+    @POST("posts")
+    Call<Posts>CreatePost(
+            @Field("userId") int userId,
+            @Field("title") String title,
+            @Field("body") String body
+    );
 }

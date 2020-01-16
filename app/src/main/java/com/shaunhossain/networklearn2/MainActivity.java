@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void CreatePost(){
 
-        Posts posts = new Posts(21,"i am a android developer.","i have to learn Kotlin");
+       // Posts posts = new Posts(21,"i am a android developer.","i have to learn Kotlin");
 
-        Call<Posts>call=service.CreatePost(posts);
+        Call<Posts>call=service.CreatePost(21,"i am a android developer.","i have to learn Kotlin and dejango");
 
         call.enqueue(new Callback<Posts>() {
             @Override
