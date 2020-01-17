@@ -5,6 +5,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -59,4 +60,7 @@ public interface NetworkService {
     * anotation to carry the body*/
     @PUT("posts/{id}")
     Call<Posts>PatchUpdatPost(@Path("id")int id,@FieldMap Map<String, String>parameters);
+
+    @DELETE("posts/{id}")
+    Call<Void> DeletePost(@Path("id")int id);
 }

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //getResultOfTodList();
 
         //CreatePost();
-        UpdatePosts();
+        //UpdatePosts();
 
 
         /*
@@ -46,7 +46,26 @@ public class MainActivity extends AppCompatActivity {
 
         //PlayWithPatchUpdatePost();
 
+        DetetePost();
 
+
+    }
+    private void DetetePost(){
+
+        Call<Void> call = service.DeletePost(2);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                contentText.setText("Code :"+response.code());
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                contentText.setText(t.getMessage());
+
+            }
+        });
     }
 
     private void PlayWithPatchUpdatePost(){
@@ -60,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         updatePost.put("userId","11");
         updatePost.put("title","I am going to learn retrofit");
         updatePost.put("body","i wll also learn all the necessary components to finish my android learning goal");
+
 
         Call<Posts>call=service.PatchUpdatPost(1,updatePost);
 
