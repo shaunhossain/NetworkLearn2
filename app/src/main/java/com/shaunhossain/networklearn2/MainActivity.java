@@ -36,7 +36,53 @@ public class MainActivity extends AppCompatActivity {
         service = retrofit.create(NetworkService.class);
         //getResultOfTodList();
 
-        CreatePost();
+        //CreatePost();
+        UpdatePosts();
+
+
+    }
+
+    private void UpdatePosts(){
+
+        //Posts posts = new Posts(21,"i am a android developer.","i have to learn Kotlin");
+        Posts posts = new Posts(21,null,"i have to learn Kotlin");
+
+        //Call<Posts>call =service.CreatePost(posts);
+        //Call<Posts>call =service.UpdatePost(1,posts);
+
+        Call<Posts>call=service.PatchPost(1, posts);
+
+        call.enqueue(new Callback<Posts>() {
+            @Override
+            public void onResponse(Call<Posts> call, Response<Posts> response) {
+
+                if (!response.isSuccessful()){
+
+                    contentText.setText("code:"+response.code());
+                }
+
+                Posts postResponse = response.body();
+
+                String content="";
+                content +="Response code: "+response.code()+"\n";
+                content += "User Id :"+postResponse.getUserId()+"\n";
+                content += "Id :"+postResponse.getId()+"\n";
+                content += "Title :"+postResponse.getTitle()+"\n";
+                content +="Body :"+postResponse.getBody()+"\n\n\n";
+
+                contentText.append(content);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Posts> call, Throwable t) {
+
+                contentText.setText(t.getMessage());
+
+
+            }
+        });
 
 
     }
