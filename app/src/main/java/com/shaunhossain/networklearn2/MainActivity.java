@@ -40,6 +40,61 @@ public class MainActivity extends AppCompatActivity {
         UpdatePosts();
 
 
+        /*
+         * PUT and Patch request will not support Field or FieldMap to carry the body of the json . we must have to use Body(@Body)
+         * anotation to carry the body*/
+
+        //PlayWithPatchUpdatePost();
+
+
+    }
+
+    private void PlayWithPatchUpdatePost(){
+
+        /*
+         * PUT and Patch request will not support Field or FieldMap to carry the body of the json . we must have to use Body(@Body)
+         * anotation to carry the body*/
+        //Warning : not support FieldMap or Field by PUT or Patch request.
+
+        Map<String,String>updatePost= new HashMap<>();
+        updatePost.put("userId","11");
+        updatePost.put("title","I am going to learn retrofit");
+        updatePost.put("body","i wll also learn all the necessary components to finish my android learning goal");
+
+        Call<Posts>call=service.PatchUpdatPost(1,updatePost);
+
+        call.enqueue(new Callback<Posts>() {
+            @Override
+            public void onResponse(Call<Posts> call, Response<Posts> response) {
+
+                if (!response.isSuccessful()){
+
+                    contentText.setText("code:"+response.code());
+                }
+
+                Posts postResponse = response.body();
+
+                String content="";
+                content +="Response code: "+response.code()+"\n";
+                content += "User Id :"+postResponse.getUserId()+"\n";
+                content += "Id :"+postResponse.getId()+"\n";
+                content += "Title :"+postResponse.getTitle()+"\n";
+                content +="Body :"+postResponse.getBody()+"\n\n\n";
+
+                contentText.append(content);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Posts> call, Throwable t) {
+
+                contentText.setText(t.getMessage());
+
+
+            }
+        });
+
     }
 
     private void UpdatePosts(){

@@ -52,4 +52,11 @@ public interface NetworkService {
 
     @PATCH("posts/{id}")
     Call<Posts>PatchPost(@Path("id")int id,@Body Posts posts);
+
+
+    /*
+    * PUT and Patch request will not support Field or FieldMap to carry the body of the json . we must have to use Body(@Body)
+    * anotation to carry the body*/
+    @PUT("posts/{id}")
+    Call<Posts>PatchUpdatPost(@Path("id")int id,@FieldMap Map<String, String>parameters);
 }
