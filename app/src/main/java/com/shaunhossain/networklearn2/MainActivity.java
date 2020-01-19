@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextView contentText;
     NetworkService service;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         getResultOfTodList();
 
         //CreatePost();
-        //UpdatePosts();
+        UpdatePosts();
 
 
         /*
@@ -134,10 +133,15 @@ public class MainActivity extends AppCompatActivity {
         //Posts posts = new Posts(21,"i am a android developer.","i have to learn Kotlin");
         Posts posts = new Posts(21,null,"i have to learn Kotlin");
 
-        //Call<Posts>call =service.CreatePost(posts);
-        //Call<Posts>call =service.UpdatePost(1,posts);
+        //testing dynemic header using HeaderMap
+        Map<String,String>header=new HashMap<>();
+        header.put("dynemic1-Header1","123");
+        header.put("dynemic2-Header2","abc");
 
-        Call<Posts>call=service.PatchPost(1, posts);
+        //Call<Posts>call =service.CreatePost(posts);
+        Call<Posts>call =service.UpdatePost(header,2,posts);
+
+        //Call<Posts>call=service.PatchPost(1, posts);
 
         call.enqueue(new Callback<Posts>() {
             @Override

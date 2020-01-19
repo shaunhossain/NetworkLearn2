@@ -10,6 +10,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -48,8 +51,19 @@ public interface NetworkService {
     @POST("posts")
     Call<Posts>CreatePost(@FieldMap Map<String , String> posts);
 
+
+    //Add multipule static header by using {}
+    // @Headers({"Static-Header:123","Static-Header:123"})
+
+    @Headers("Static-Header:123")
     @PUT("posts/{id}")
-    Call<Posts>UpdatePost(@Path("id")int id,@Body Posts posts);
+    Call<Posts>UpdatePost(@Header("Dynamic-Header:")String header, @Path("id")int id, @Body Posts posts);
+
+    @Headers("Static-Header:123")
+    @PUT("posts/{id}")
+    Call<Posts>UpdatePost(@HeaderMap Map<String,String>header,
+                          @Path("id")int id,
+                          @Body Posts posts);
 
     @PATCH("posts/{id}")
     Call<Posts>PatchPost(@Path("id")int id,@Body Posts posts);
